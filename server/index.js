@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const sequelize = require('./db');
 const cors = require('cors');
-const models = require('./models/models_connections');
+const models = require('./ORM/models_connections');
 
 const PORT = process.env.PORT || 5000;
 const app = new express();
