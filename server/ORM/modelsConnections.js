@@ -3,11 +3,11 @@ const {DataTypes} = require('sequelize');
 const Basket = require("./basket");
 const User = require("./user");
 const Rating = require("./rating");
-const BasketDevice = require("./basket_device");
+const BasketDevice = require("./basketDevice");
 const Device = require("./device");
 const Type = require("./type");
 const Brand = require("./brand");
-const DeviceInfo = require("./device_info");
+const DeviceInfo = require("./deviceInfo");
 
 const TypeBrand = sequelize.define('type_brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
