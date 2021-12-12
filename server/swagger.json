@@ -4,9 +4,51 @@
     "version": "1.0.0",
     "title": "magazine-server"
   },
+  "definitions": {
+    "regRequest": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "myemail@mail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345"
+        },
+        "role": {
+          "type": "string",
+          "example": "user"
+        }
+      }
+    },
+    "loginRequest": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "myemail@mail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345"
+        }
+      }
+    }
+  },
   "paths": {
     "/api/user/reg": {
       "post": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/regRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -19,6 +61,18 @@
     },
     "/api/user/login": {
       "post": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/loginRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -31,6 +85,9 @@
     },
     "/api/user/auth": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "OK"
