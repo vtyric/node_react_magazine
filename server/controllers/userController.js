@@ -33,7 +33,7 @@ class UserController {
         if (!user) {
             return next(ApiError.internal('Пользователь с таким email не найден'));
         }
-        if (bcrypt.compareSync(password, user.password)) {
+        if (!bcrypt.compareSync(password, user.password)) {
             return next(ApiError.internal('Указан неверный пароль'));
         }
         const token = generateJwt(user.id, user.email, user.role);
@@ -42,7 +42,9 @@ class UserController {
     }
 
     async check(request, response, next) {
-        response.json(['чек']);
+        const token = generateJwt(request.user.id, request.user.email, request.user.role);
+
+        return response.json({token});
     }
 }
 

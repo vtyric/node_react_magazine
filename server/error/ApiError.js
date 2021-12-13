@@ -10,6 +10,8 @@ class ApiError extends Error {
     static internal = message => new ApiError(500, message);
 
     static forbidden = message => new ApiError(403, message);
+
+    static notAuthorized = () => new ApiError(401, "Пользователь не авторизован");
 }
 
 module.exports = ApiError;
