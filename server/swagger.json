@@ -32,14 +32,6 @@
           "example": "12345"
         }
       }
-    },
-    "checkRequest": {
-      "properties": {
-        "token": {
-          "type": "string",
-          "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJteWVtYWlsMUBtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjM5MzkxMjM5LCJleHAiOjE2Mzk0Nzc2Mzl9.fh5tJOBVaX0vqEdOy4YTUZ7wbBVnKYnMVJHY8-kLsI4"
-        }
-      }
     }
   },
   "paths": {
