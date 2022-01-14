@@ -35,18 +35,18 @@
     }
   },
   "paths": {
-    "/api/user/reg": {
-      "post": {
+    "/api/user/auth": {
+      "get": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "request",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/regRequest"
-            }
+            "name": "authorization",
+            "in": "header",
+            "description": "an authorization header",
+            "required": "true",
+            "type": "string"
           }
         ],
         "responses": {
@@ -83,18 +83,18 @@
         }
       }
     },
-    "/api/user/auth": {
-      "get": {
+    "/api/user/reg": {
+      "post": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "description": "an authorization header",
-            "required": "true",
-            "type": "string"
+            "name": "request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/regRequest"
+            }
           }
         ],
         "responses": {
