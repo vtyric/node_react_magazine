@@ -40,6 +40,14 @@
           "example": "тип"
         }
       }
+    },
+    "createBrandRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "бренд"
+        }
+      }
     }
   },
   "paths": {
@@ -162,6 +170,70 @@
           "Type"
         ],
         "description": "удалить тип по id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/brand/get": {
+      "get": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "получить все бренды",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/brand/create": {
+      "post": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "создать новый бренд",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/createBrandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/brand/delete:id": {
+      "delete": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "удалить бренд по id",
         "parameters": [
           {
             "name": "id",
