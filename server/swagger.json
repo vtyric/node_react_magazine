@@ -32,6 +32,14 @@
           "example": "12345"
         }
       }
+    },
+    "createTypeRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "тип"
+        }
+      }
     }
   },
   "paths": {
@@ -95,6 +103,70 @@
             "schema": {
               "$ref": "#/definitions/regRequest"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/type/get": {
+      "get": {
+        "tags": [
+          "Type"
+        ],
+        "description": "получить все типы",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/type/create": {
+      "post": {
+        "tags": [
+          "Type"
+        ],
+        "description": "создать новый тип",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/createTypeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/type/delete:id": {
+      "delete": {
+        "tags": [
+          "Type"
+        ],
+        "description": "удалить тип по id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number"
           }
         ],
         "responses": {
