@@ -48,6 +48,18 @@
           "example": "бренд"
         }
       }
+    },
+    "info": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "заголовок"
+        },
+        "description": {
+          "type": "string",
+          "example": "описание"
+        }
+      }
     }
   },
   "paths": {
@@ -241,6 +253,152 @@
             "type": "number"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/create": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "default": "12 pro"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "type": "number",
+            "default": 11111
+          },
+          {
+            "name": "brandId",
+            "in": "formData",
+            "type": "integer",
+            "default": 2
+          },
+          {
+            "name": "typeId",
+            "in": "formData",
+            "type": "integer",
+            "default": 5
+          },
+          {
+            "name": "info",
+            "in": "formData",
+            "type": "string",
+            "default": "{ \"title\":\"заголовок\", \"description\":\"описание\"}"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "type": "file"
+          }
+        ],
+        "description": "создать девайс",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/get": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "default": 5
+          },
+          {
+            "name": "typeId",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "default": 2
+          },
+          {
+            "name": "limit",
+            "type": "number",
+            "required": false,
+            "in": "query",
+            "default": 9
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "number",
+            "required": false,
+            "default": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/get:id": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "query",
+            "default": 1
+          }
+        ],
+        "description": "получить девайс по id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/delete:id": {
+      "delete": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "query",
+            "default": 1
+          }
+        ],
+        "description": "удалить девайс по id",
         "responses": {
           "200": {
             "description": "OK"
