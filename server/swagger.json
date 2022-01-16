@@ -32,21 +32,49 @@
           "example": "12345"
         }
       }
+    },
+    "createTypeRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "тип"
+        }
+      }
+    },
+    "createBrandRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "бренд"
+        }
+      }
+    },
+    "info": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "заголовок"
+        },
+        "description": {
+          "type": "string",
+          "example": "описание"
+        }
+      }
     }
   },
   "paths": {
-    "/api/user/reg": {
-      "post": {
+    "/api/user/auth": {
+      "get": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "request",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/regRequest"
-            }
+            "name": "authorization",
+            "in": "header",
+            "description": "an authorization header",
+            "required": "true",
+            "type": "string"
           }
         ],
         "responses": {
@@ -83,20 +111,294 @@
         }
       }
     },
-    "/api/user/auth": {
-      "get": {
+    "/api/user/reg": {
+      "post": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "description": "an authorization header",
-            "required": "true",
-            "type": "string"
+            "name": "request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/regRequest"
+            }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/type/get": {
+      "get": {
+        "tags": [
+          "Type"
+        ],
+        "description": "получить все типы",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/type/create": {
+      "post": {
+        "tags": [
+          "Type"
+        ],
+        "description": "создать новый тип",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/createTypeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/type/delete:id": {
+      "delete": {
+        "tags": [
+          "Type"
+        ],
+        "description": "удалить тип по id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/brand/get": {
+      "get": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "получить все бренды",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/brand/create": {
+      "post": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "создать новый бренд",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/createBrandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/brand/delete:id": {
+      "delete": {
+        "tags": [
+          "Brand"
+        ],
+        "description": "удалить бренд по id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/create": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "default": "12 pro"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "type": "number",
+            "default": 11111
+          },
+          {
+            "name": "brandId",
+            "in": "formData",
+            "type": "integer",
+            "default": 2
+          },
+          {
+            "name": "typeId",
+            "in": "formData",
+            "type": "integer",
+            "default": 5
+          },
+          {
+            "name": "info",
+            "in": "formData",
+            "type": "string",
+            "default": "{ \"title\":\"заголовок\", \"description\":\"описание\"}"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "type": "file"
+          }
+        ],
+        "description": "создать девайс",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/get": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "default": 5
+          },
+          {
+            "name": "typeId",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "default": 2
+          },
+          {
+            "name": "limit",
+            "type": "number",
+            "required": false,
+            "in": "query",
+            "default": 9
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "number",
+            "required": false,
+            "default": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/get:id": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "query",
+            "default": 1
+          }
+        ],
+        "description": "получить девайс по id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/device/delete:id": {
+      "delete": {
+        "tags": [
+          "Device"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "query",
+            "default": 1
+          }
+        ],
+        "description": "удалить девайс по id",
         "responses": {
           "200": {
             "description": "OK"
